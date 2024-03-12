@@ -6,8 +6,12 @@ import {
   Panel,
   PanelHeader,
   usePlatform,
+  Group,
+  Header,
+  Spacing,
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
+import CartItem from "./components/cart-item";
 
 export default function App() {
   const platform = usePlatform();
@@ -21,6 +25,21 @@ export default function App() {
           <View activePanel="main">
             <Panel id="main">
               <PanelHeader>VKUI</PanelHeader>
+              <Group header={<Header mode="secondary">Корзина:</Header>}>
+                <SplitLayout>
+                  <SplitCol>
+                    <Spacing size={16} />
+                    <Group>
+                      <CartItem />
+                    </Group>
+                    <Spacing size={16} />
+                    <Group>
+                      <CartItem />
+                    </Group>
+                  </SplitCol>
+                  <SplitCol maxWidth={300}>ffffrfr</SplitCol>
+                </SplitLayout>
+              </Group>
             </Panel>
           </View>
         </SplitCol>
