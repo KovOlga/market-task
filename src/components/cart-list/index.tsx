@@ -1,4 +1,4 @@
-import { Group, Spacing, Spinner } from "@vkontakte/vkui";
+import { Div, Group, Spinner } from "@vkontakte/vkui";
 import { FC, useEffect } from "react";
 import CartListItem from "../cart-list-item";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
@@ -16,22 +16,19 @@ const CartList: FC = () => {
   useEffect(() => {
     dispatch(updateTotalPriceAction());
   }, [products]);
-  
+
   return (
-    <>
+    <Div>
       {loading && !error && <Spinner size="large" />}
       {products.length > 0 &&
         products.map((product) => {
           return (
-            <div key={product.id}>
-              <Group>
-                <Spacing size={16} />
-                <CartListItem product={product} />
-              </Group>
-            </div>
+            <Group key={product.id}>
+              <CartListItem product={product} />
+            </Group>
           );
         })}
-    </>
+    </Div>
   );
 };
 
