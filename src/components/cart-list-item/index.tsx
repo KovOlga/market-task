@@ -1,8 +1,4 @@
-import {
-  Icon16Add,
-  Icon16Minus,
-  Icon24Delete,
-} from "@vkontakte/icons";
+import { Icon16Add, Icon16Minus, Icon24Delete } from "@vkontakte/icons";
 import {
   Button,
   ButtonGroup,
@@ -11,19 +7,15 @@ import {
   RichCell,
 } from "@vkontakte/vkui";
 import { FC } from "react";
+import { IProduct } from "../../types/data";
 
-const CartItem: FC = () => {
+const CartListItem: FC<{ product: IProduct }> = ({ product }) => {
   return (
     <RichCell
-      before={
-        <Image
-          size={96}
-          src={"https://cdn.dummyjson.com/product-images/59/thumbnail.jpg"}
-        />
-      }
+      before={<Image size={96} src={product.image} />}
       multiline
-      caption="Команда ВКонтакте, Санкт-ПетербурККоманда ВКонтакте, Санкт-ПетербургКоманда ВКонтакте, Санкт-Петербургоманда ВКонтакте, Санкт-Петербургг"
-      bottom={"cost"}
+      caption={product.description}
+      bottom={product.price}
       actions={
         <ButtonGroup
           style={{ alignItems: "center", justifyContent: "space-between" }}
@@ -46,9 +38,9 @@ const CartItem: FC = () => {
         </ButtonGroup>
       }
     >
-      Илья Гришин
+      {product.title}
     </RichCell>
   );
 };
 
-export default CartItem;
+export default CartListItem;

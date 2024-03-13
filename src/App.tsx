@@ -8,13 +8,21 @@ import {
   usePlatform,
   Group,
   Header,
-  Spacing,
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
-import CartItem from "./components/cart-item";
+import Summary from "./components/summary";
+import { useEffect } from "react";
+import { useAppDispatch } from "./hooks/hooks";
+import { getCarts } from "./services/actions";
+import CartList from "./components/cart-list";
 
 export default function App() {
   const platform = usePlatform();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCarts());
+  }, []);
 
   return (
     <AppRoot>
@@ -24,20 +32,15 @@ export default function App() {
         <SplitCol autoSpaced>
           <View activePanel="main">
             <Panel id="main">
-              <PanelHeader>VKUI</PanelHeader>
-              <Group header={<Header mode="secondary">Корзина:</Header>}>
+              <PanelHeader>Корзина</PanelHeader>
+              <Group header={<Header mode="primary">Список товаров:</Header>}>
                 <SplitLayout>
                   <SplitCol>
-                    <Spacing size={16} />
-                    <Group>
-                      <CartItem />
-                    </Group>
-                    <Spacing size={16} />
-                    <Group>
-                      <CartItem />
-                    </Group>
+                    <CartList />
                   </SplitCol>
-                  <SplitCol maxWidth={300}>ffffrfr</SplitCol>
+                  <SplitCol maxWidth={500}>
+                    <Summary />
+                  </SplitCol>
                 </SplitLayout>
               </Group>
             </Panel>

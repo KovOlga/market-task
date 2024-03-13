@@ -1,3 +1,4 @@
+import { IProduct } from "../types/data";
 import {
   GET_CARTS_FAILED,
   GET_CARTS_REQUEST,
@@ -6,13 +7,15 @@ import {
 } from "./actions";
 
 export interface IInitialState {
-  carts: any[];
+  products: IProduct[];
+  totalSum: number;
   reqInProccess: boolean;
   reqFailed: boolean;
 }
 
 const initialState: IInitialState = {
-  carts: [],
+  products: [],
+  totalSum: 0,
   reqInProccess: false,
   reqFailed: false,
 };
@@ -26,7 +29,7 @@ export const cartsReducer = (
       return {
         ...state,
         reqInProccess: true,
-        carts: [],
+        products: [],
         reqFailed: false,
       };
     }
@@ -35,7 +38,7 @@ export const cartsReducer = (
         ...state,
         reqInProccess: false,
         reqFailed: false,
-        carts: action.carts,
+        products: action.products,
       };
     }
     case GET_CARTS_FAILED: {

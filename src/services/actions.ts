@@ -1,4 +1,6 @@
 import { AppDispatch, AppThunk } from "../types";
+import { IProduct } from "../types/data";
+import { getCartsList } from "./api";
 
 export const GET_CARTS_REQUEST = "GET_CARTS_REQUEST";
 export const GET_CARTS_SUCCESS = "GET_CARTS_SUCCESS";
@@ -10,7 +12,7 @@ interface IGetCartsRequest {
 
 interface IGetCartsSuccess {
   readonly type: typeof GET_CARTS_SUCCESS;
-  carts: any[];
+  products: IProduct[];
 }
 
 interface IGetCartsFailed {
@@ -26,9 +28,9 @@ export const getCartsRequestAction = (): IGetCartsRequest => ({
   type: GET_CARTS_REQUEST,
 });
 
-export const getCartsSuccessAction = (carts: any[]): IGetCartsSuccess => ({
+export const getCartsSuccessAction = (products: IProduct[]): IGetCartsSuccess => ({
   type: GET_CARTS_SUCCESS,
-  carts,
+  products
 });
 
 export const getCartsFailedAction = (): IGetCartsFailed => ({
@@ -39,10 +41,11 @@ export const getCarts: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     dispatch(getCartsRequestAction());
     return getCartsList()
-      .then((carts) => {
-        dispatch(getCartsSuccessAction(carts));
+      .then((products) => {
+        console.log("products", products);
+        dispatch(getCartsSuccessAction(products));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(getCartsFailedAction());
       });
   };
