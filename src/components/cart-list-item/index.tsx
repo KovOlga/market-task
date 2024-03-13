@@ -44,19 +44,24 @@ const CartListItem: FC<{ product: TProductCounted }> = ({ product }) => {
         >
           <ButtonGroup style={{ alignItems: "center" }}>
             <IconButton
-              onClick={() => increaseCounter(product.id)}
-              hasHover
-              label="add"
-            >
-              <Icon16Add />
-            </IconButton>
-            {product.counter}
-            <IconButton
               onClick={() => decreaseCounter(product.id)}
               hasHover
               label="minus"
+              disabled={product.counter === 1}
+              style={{
+                margin: "0px",
+              }}
             >
               <Icon16Minus />
+            </IconButton>
+            {product.counter}
+            <IconButton
+              onClick={() => increaseCounter(product.id)}
+              hasHover
+              label="add"
+              disabled={product.counter === 10}
+            >
+              <Icon16Add />
             </IconButton>
           </ButtonGroup>
           <Button
