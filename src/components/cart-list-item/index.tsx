@@ -9,16 +9,20 @@ import {
 import { FC } from "react";
 import { TProductCounted } from "../../types/data";
 import { useAppDispatch } from "../../hooks/hooks";
-import { deleteProductItemThunk } from "../../services/actions";
+import {
+  decreaseProductCounterThunk,
+  deleteProductItemThunk,
+  increaseProductCounterThunk,
+} from "../../services/actions";
 
 const CartListItem: FC<{ product: TProductCounted }> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const increaseCounter = (id: number) => {
-    console.log("id", id);
+    dispatch(increaseProductCounterThunk(id));
   };
   const decreaseCounter = (id: number) => {
-    console.log("decreaseCounter", id);
+    dispatch(decreaseProductCounterThunk(id));
   };
 
   const handleDelete = (id: number) => {
