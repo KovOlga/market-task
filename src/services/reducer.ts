@@ -5,6 +5,7 @@ import {
   GET_CARTS_REQUEST,
   GET_CARTS_SUCCESS,
   TCartsActions,
+  UPDATE_TOTAL_PRICE,
 } from "./actions";
 
 export interface IInitialState {
@@ -40,12 +41,22 @@ export const cartsReducer = (
         reqInProccess: false,
         reqFailed: false,
         products: action.products.map((item) => {
-          return { ...item, counter: 0 };
+          return { ...item, counter: 1 };
         }),
       };
     }
     case GET_CARTS_FAILED: {
       return { ...state, reqFailed: true, reqInProccess: false };
+    }
+    case UPDATE_TOTAL_PRICE: {
+      let totalPrice = 0;
+      state.products.forEach((product) => {
+        totalPrice = totalPrice + product.price * product.counter;
+      });
+      return {
+        ...state,
+        totalPrice: totalPrice,
+      };
     }
     case DELETE_PRODUCT_ITEM: {
       return {
