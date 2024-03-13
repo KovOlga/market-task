@@ -20,7 +20,7 @@ const request = (url: string, options: IOptions) => {
 };
 
 export const getCartsList = (): Promise<any> => {
-  return request("https://fakestoreapi.com/products", {
+  return request("https://fakestoreapi.com/products?limit=5", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

@@ -7,9 +7,24 @@ import {
   RichCell,
 } from "@vkontakte/vkui";
 import { FC } from "react";
-import { IProduct } from "../../types/data";
+import { TProductCounted } from "../../types/data";
+import { useAppDispatch } from "../../hooks/hooks";
+import { deleteProductItemThunk } from "../../services/actions";
 
-const CartListItem: FC<{ product: IProduct }> = ({ product }) => {
+const CartListItem: FC<{ product: TProductCounted }> = ({ product }) => {
+  const dispatch = useAppDispatch();
+
+  const increaseCounter = (id: number) => {
+    console.log("id", id);
+  };
+  const decreaseCounter = (id: number) => {
+    console.log("decreaseCounter", id);
+  };
+
+  const handleDelete = (id: number) => {
+    console.log("handleDelete", id);
+    dispatch(deleteProductItemThunk(id));
+  };
   return (
     <RichCell
       before={<Image size={96} src={product.image} />}
@@ -24,15 +39,27 @@ const CartListItem: FC<{ product: IProduct }> = ({ product }) => {
           stretched
         >
           <ButtonGroup style={{ alignItems: "center" }}>
-            <IconButton hasHover label="add">
+            <IconButton
+              onClick={() => increaseCounter(product.id)}
+              hasHover
+              label="add"
+            >
               <Icon16Add />
             </IconButton>
-            1
-            <IconButton hasHover label="minus">
+            {product.counter}
+            <IconButton
+              onClick={() => decreaseCounter(product.id)}
+              hasHover
+              label="minus"
+            >
               <Icon16Minus />
             </IconButton>
           </ButtonGroup>
-          <Button mode="link" before={<Icon24Delete />}>
+          <Button
+            onClick={() => handleDelete(product.id)}
+            mode="link"
+            before={<Icon24Delete />}
+          >
             Удалить товар
           </Button>
         </ButtonGroup>
