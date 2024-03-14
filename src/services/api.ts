@@ -1,3 +1,6 @@
+import { TProduct } from "../types/data";
+import { productsEndPoint } from "../utils/constants";
+
 interface IOptions {
   method: string;
   headers: {
@@ -19,8 +22,8 @@ const request = (url: string, options: IOptions) => {
   return fetch(url, options).then(getResponse);
 };
 
-export const getCartsList = (): Promise<any> => {
-  return request("https://fakestoreapi.com/products?limit=5", {
+export const getCartsList = (): Promise<TProduct[]> => {
+  return request(`${productsEndPoint}?limit=6`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

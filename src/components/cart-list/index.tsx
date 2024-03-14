@@ -20,7 +20,12 @@ const CartList: FC = () => {
   return (
     <Div>
       {loading && !error && <Spinner size="large" />}
-      {products.length > 0 &&
+      {!loading && error && (
+        <Div>Произошла ошибка. Здесь должна быть ее обработка</Div>
+      )}
+      {!loading &&
+        !error &&
+        products.length > 0 &&
         products.map((product) => {
           return (
             <Group key={product.id}>
