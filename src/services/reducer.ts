@@ -2,11 +2,11 @@ import { TProductCounted } from "../types/data";
 import {
   DECREASE_PRODUCT_COUNTER,
   DELETE_PRODUCT_ITEM,
-  GET_CARTS_FAILED,
-  GET_CARTS_REQUEST,
-  GET_CARTS_SUCCESS,
+  GET_PRODUCTS_FAILED,
+  GET_PRODUCTS_REQUEST,
+  GET_PRODUCTS_SUCCESS,
   INCREASE_PRODUCT_COUNTER,
-  TCartsActions,
+  TProductsActions,
   UPDATE_TOTAL_PRICE,
 } from "./actions";
 
@@ -24,12 +24,12 @@ const initialState: IInitialState = {
   reqFailed: false,
 };
 
-export const cartsReducer = (
+export const productsReducer = (
   state = initialState,
-  action: TCartsActions
+  action: TProductsActions
 ): IInitialState => {
   switch (action.type) {
-    case GET_CARTS_REQUEST: {
+    case GET_PRODUCTS_REQUEST: {
       return {
         ...state,
         reqInProccess: true,
@@ -37,7 +37,7 @@ export const cartsReducer = (
         reqFailed: false,
       };
     }
-    case GET_CARTS_SUCCESS: {
+    case GET_PRODUCTS_SUCCESS: {
       return {
         ...state,
         reqInProccess: false,
@@ -47,7 +47,7 @@ export const cartsReducer = (
         }),
       };
     }
-    case GET_CARTS_FAILED: {
+    case GET_PRODUCTS_FAILED: {
       return { ...state, reqFailed: true, reqInProccess: false };
     }
     case INCREASE_PRODUCT_COUNTER: {

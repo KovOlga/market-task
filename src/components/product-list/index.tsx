@@ -1,17 +1,19 @@
 import { Div, Group, Spinner } from "@vkontakte/vkui";
 import { FC, useEffect } from "react";
-import CartListItem from "../cart-list-item";
+import ProductListItem from "../product-list-item";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { RootState } from "../../types";
 import { updateTotalPriceAction } from "../../services/actions";
 
-const CartList: FC = () => {
+const ProductList: FC = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector((store: RootState) => store.carts.products);
-  const loading = useAppSelector(
-    (store: RootState) => store.carts.reqInProccess
+  const products = useAppSelector(
+    (store: RootState) => store.products.products
   );
-  const error = useAppSelector((store: RootState) => store.carts.reqFailed);
+  const loading = useAppSelector(
+    (store: RootState) => store.products.reqInProccess
+  );
+  const error = useAppSelector((store: RootState) => store.products.reqFailed);
 
   useEffect(() => {
     dispatch(updateTotalPriceAction());
@@ -29,7 +31,7 @@ const CartList: FC = () => {
         products.map((product) => {
           return (
             <Group key={product.id}>
-              <CartListItem product={product} />
+              <ProductListItem product={product} />
             </Group>
           );
         })}
@@ -37,4 +39,4 @@ const CartList: FC = () => {
   );
 };
 
-export default CartList;
+export default ProductList;

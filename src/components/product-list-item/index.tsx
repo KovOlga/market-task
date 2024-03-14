@@ -15,7 +15,7 @@ import {
   increaseProductCounterThunk,
 } from "../../services/actions";
 
-const CartListItem: FC<{ product: TProductCounted }> = ({ product }) => {
+const ProductListItem: FC<{ product: TProductCounted }> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const increaseCounter = (id: number) => {
@@ -79,4 +79,4 @@ const CartListItem: FC<{ product: TProductCounted }> = ({ product }) => {
   );
 };
 
-export default CartListItem;
+export default ProductListItem;

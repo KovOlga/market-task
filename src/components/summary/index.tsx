@@ -4,7 +4,7 @@ import { useAppSelector } from "../../hooks/hooks";
 import { RootState } from "../../types";
 
 const Summary: FC = () => {
-  const total = useAppSelector((store: RootState) => store.carts.totalPrice);
+  const total = useAppSelector((store: RootState) => store.products.totalPrice);
   return (
     <Div>
       <Text>{`Итого: ${total} руб.`}</Text>

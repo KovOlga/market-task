@@ -11,9 +11,9 @@ import {
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import Summary from "./components/summary";
-import CartList from "./components/cart-list";
+import ProductList from "./components/product-list";
 import { useAppDispatch } from "./hooks/hooks";
-import { getCartsThunk } from "./services/actions";
+import { getProductsThunk } from "./services/actions";
 import { useEffect } from "react";
 
 export default function App() {
@@ -21,7 +21,7 @@ export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCartsThunk());
+    dispatch(getProductsThunk());
   }, [dispatch]);
 
   return (
@@ -44,7 +44,7 @@ export default function App() {
                   }}
                 >
                   <SplitCol width="100%">
-                    <CartList />
+                    <ProductList />
                   </SplitCol>
                   <SplitCol width="100%">
                     <Summary />

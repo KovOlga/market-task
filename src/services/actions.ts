@@ -1,26 +1,26 @@
 import { AppDispatch, AppThunk } from "../types";
 import { TProduct } from "../types/data";
-import { getCartsList } from "./api";
+import { getProductsList } from "./api";
 
-export const GET_CARTS_REQUEST = "GET_CARTS_REQUEST";
-export const GET_CARTS_SUCCESS = "GET_CARTS_SUCCESS";
-export const GET_CARTS_FAILED = "GET_CARTS_FAILED";
+export const GET_PRODUCTS_REQUEST = "GET_PRODUCTS_REQUEST";
+export const GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS";
+export const GET_PRODUCTS_FAILED = "GET_PRODUCTS_FAILED";
 export const UPDATE_TOTAL_PRICE = "UPDATE_TOTAL_PRICE";
 export const DELETE_PRODUCT_ITEM = "DELETE_PRODUCT_ITEM";
 export const INCREASE_PRODUCT_COUNTER = "INCREASE_PRODUCT_COUNTER";
 export const DECREASE_PRODUCT_COUNTER = "DECREASE_PRODUCT_COUNTER";
 
-interface IGetCartsRequest {
-  readonly type: typeof GET_CARTS_REQUEST;
+interface IGetProductsRequest {
+  readonly type: typeof GET_PRODUCTS_REQUEST;
 }
 
-interface IGetCartsSuccess {
-  readonly type: typeof GET_CARTS_SUCCESS;
+interface IGetProductsSuccess {
+  readonly type: typeof GET_PRODUCTS_SUCCESS;
   products: TProduct[];
 }
 
-interface IGetCartsFailed {
-  readonly type: typeof GET_CARTS_FAILED;
+interface IGetProductsFailed {
+  readonly type: typeof GET_PRODUCTS_FAILED;
 }
 
 interface IUpdateTotalPriceAction {
@@ -42,28 +42,28 @@ interface IDecreaseProductCounterAction {
   readonly itemId: number;
 }
 
-export type TCartsActions =
-  | IGetCartsRequest
-  | IGetCartsSuccess
-  | IGetCartsFailed
+export type TProductsActions =
+  | IGetProductsRequest
+  | IGetProductsSuccess
+  | IGetProductsFailed
   | IUpdateTotalPriceAction
   | IDeleteProductItemAction
   | IIncreaseProductCounterAction
   | IDecreaseProductCounterAction;
 
-export const getCartsRequestAction = (): IGetCartsRequest => ({
-  type: GET_CARTS_REQUEST,
+export const getProductsRequestAction = (): IGetProductsRequest => ({
+  type: GET_PRODUCTS_REQUEST,
 });
 
-export const getCartsSuccessAction = (
+export const getProductsSuccessAction = (
   products: TProduct[]
-): IGetCartsSuccess => ({
-  type: GET_CARTS_SUCCESS,
+): IGetProductsSuccess => ({
+  type: GET_PRODUCTS_SUCCESS,
   products,
 });
 
-export const getCartsFailedAction = (): IGetCartsFailed => ({
-  type: GET_CARTS_FAILED,
+export const getProductsFailedAction = (): IGetProductsFailed => ({
+  type: GET_PRODUCTS_FAILED,
 });
 
 export const updateTotalPriceAction = (): IUpdateTotalPriceAction => ({
@@ -91,15 +91,15 @@ export const decreaseProductCounterAction = (
   itemId,
 });
 
-export const getCartsThunk: AppThunk = () => {
+export const getProductsThunk: AppThunk = () => {
   return function (dispatch: AppDispatch) {
-    dispatch(getCartsRequestAction());
-    return getCartsList()
+    dispatch(getProductsRequestAction());
+    return getProductsList()
       .then((products) => {
-        dispatch(getCartsSuccessAction(products));
+        dispatch(getProductsSuccessAction(products));
       })
       .catch(() => {
-        dispatch(getCartsFailedAction());
+        dispatch(getProductsFailedAction());
       });
   };
 };
