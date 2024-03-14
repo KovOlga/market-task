@@ -3,7 +3,7 @@ import { FC, useEffect } from "react";
 import CartListItem from "../cart-list-item";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { RootState } from "../../types";
-import { getCarts, updateTotalPriceAction } from "../../services/actions";
+import { updateTotalPriceAction } from "../../services/actions";
 
 const CartList: FC = () => {
   const dispatch = useAppDispatch();
@@ -14,12 +14,8 @@ const CartList: FC = () => {
   const error = useAppSelector((store: RootState) => store.carts.reqFailed);
 
   useEffect(() => {
-    dispatch(getCarts());
-  }, []);
-
-  useEffect(() => {
     dispatch(updateTotalPriceAction());
-  }, [products]);
+  }, [products, dispatch]);
 
   return (
     <Div>

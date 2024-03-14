@@ -81,11 +81,9 @@ export const cartsReducer = (
     }
     case UPDATE_TOTAL_PRICE: {
       let totalPrice = 0;
-      console.log("1", totalPrice);
       state.products.forEach((product) => {
         totalPrice = totalPrice + product.price * product.counter;
       });
-      console.log("end", totalPrice);
       return {
         ...state,
         totalPrice: totalPrice,

@@ -12,9 +12,17 @@ import {
 import "@vkontakte/vkui/dist/vkui.css";
 import Summary from "./components/summary";
 import CartList from "./components/cart-list";
+import { useAppDispatch } from "./hooks/hooks";
+import { getCartsThunk } from "./services/actions";
+import { useEffect } from "react";
 
 export default function App() {
   const platform = usePlatform();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCartsThunk());
+  }, [dispatch]);
 
   return (
     <AppRoot>

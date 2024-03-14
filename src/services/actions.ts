@@ -91,12 +91,11 @@ export const decreaseProductCounterAction = (
   itemId,
 });
 
-export const getCarts: AppThunk = () => {
+export const getCartsThunk: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     dispatch(getCartsRequestAction());
     return getCartsList()
       .then((products) => {
-        console.log("products", products);
         dispatch(getCartsSuccessAction(products));
       })
       .catch(() => {
