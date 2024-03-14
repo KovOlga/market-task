@@ -59,9 +59,8 @@ export const productsReducer = (
               ...product,
               counter: product.counter + 1,
             };
-          } else {
-            return product;
           }
+          return product;
         }),
       };
     }

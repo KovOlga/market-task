@@ -35,6 +35,7 @@ const ProductList: FC = () => {
             </Group>
           );
         })}
+      {!loading && !error && products.length === 0 && <Div>Корзина пуста</Div>}
     </Div>
   );
 };
