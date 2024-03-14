@@ -26,15 +26,15 @@ const CartListItem: FC<{ product: TProductCounted }> = ({ product }) => {
   };
 
   const handleDelete = (id: number) => {
-    console.log("handleDelete", id);
     dispatch(deleteProductItemThunk(id));
   };
+
   return (
     <RichCell
       before={<Image size={96} src={product.image} />}
       multiline
       caption={product.description}
-      bottom={product.price}
+      bottom={`${product.price} руб.`}
       actions={
         <ButtonGroup
           style={{ alignItems: "center", justifyContent: "space-between" }}

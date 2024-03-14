@@ -11,18 +11,10 @@ import {
 } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 import Summary from "./components/summary";
-import { useEffect } from "react";
-import { useAppDispatch } from "./hooks/hooks";
-import { getCarts } from "./services/actions";
 import CartList from "./components/cart-list";
 
 export default function App() {
   const platform = usePlatform();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getCarts());
-  }, []);
 
   return (
     <AppRoot>
@@ -34,11 +26,19 @@ export default function App() {
             <Panel id="main">
               <PanelHeader>Корзина</PanelHeader>
               <Group header={<Header mode="primary">Список товаров:</Header>}>
-                <SplitLayout>
-                  <SplitCol>
+                <SplitLayout
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "3fr 1fr",
+                    gridTemplateRows: "auto",
+                    alignItems: "start",
+                    justifyItems: "stretch",
+                  }}
+                >
+                  <SplitCol width="100%">
                     <CartList />
                   </SplitCol>
-                  <SplitCol maxWidth={500}>
+                  <SplitCol width="100%">
                     <Summary />
                   </SplitCol>
                 </SplitLayout>

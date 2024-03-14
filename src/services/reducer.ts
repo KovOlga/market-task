@@ -74,9 +74,8 @@ export const cartsReducer = (
               ...product,
               counter: product.counter - 1,
             };
-          } else {
-            return product;
           }
+          return product;
         }),
       };
     }
